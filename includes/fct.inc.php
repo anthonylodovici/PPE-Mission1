@@ -38,7 +38,9 @@ function connecter($idVisiteur, $nom, $prenom,$type)
     $_SESSION['idVisiteur'] = $idVisiteur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
-    $_SESSION['type'] = $type;
+    // ajout d'une session avec le type et le nom du type
+    $_SESSION['id'] = $typeid;
+    $_SESSION['libelleType'] = $libelleType;
 }
 
 /**
