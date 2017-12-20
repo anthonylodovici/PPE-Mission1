@@ -35,8 +35,9 @@ case 'valideConnexion':
         $id = $utilisateur['id'];
         $nom = $utilisateur['nom'];
         $prenom = $utilisateur['prenom'];
-        connecter($id, $nom, $prenom);
-        header('Location: index.php');
+        $type = $utilisateur['idType'];
+        connecter($id, $nom, $prenom,$type);
+       
     }
     break;
 default:

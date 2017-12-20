@@ -23,8 +23,10 @@ require 'vues/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
-} elseif (empty($uc)) {
+} elseif (empty($uc)&& $type=1) {
     $uc = 'accueil';
+} elseif(empty($uc)&& $type=2){
+    $uc = 'accueilcompta';
 }
 switch ($uc) {
 case 'connexion':
@@ -32,6 +34,9 @@ case 'connexion':
     break;
 case 'accueil':
     include 'controleurs/c_accueil.php';
+    break;
+case 'accueilcompta':
+    include 'controleurs/c_accueilcompta.php';
     break;
 case 'gererFrais':
     include 'controleurs/c_gererFrais.php';

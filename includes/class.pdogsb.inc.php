@@ -94,7 +94,7 @@ class PdoGsb
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT utilisateur.id AS id, utilisateur.nom AS nom, '
-            . 'utilisateur.prenom AS prenom, utilisateur.idType AS type '
+            . 'utilisateur.prenom AS prenom '
             . 'FROM utilisateur '
             . 'WHERE utilisateur.login = :unLogin AND utilisateur.mdp = :unMdp'
         );

@@ -23,9 +23,9 @@
             </div>
             <div class="tab">
                 <li class="active">
-                    <a href="index.php"><button class="tablinks">Visiteur</button></a>
+                    <a href="index.php"><button onclick="<?php $type=1  ?>class="tablinks">Visiteur</button></a>
  
-                    <a href="index.php"><button class="tablinks">Comptable</button></a>
+                    <a href="index.php"><button onclick="<?php $type=2  ?>class="tablinks">Comptable</button></a>
   </div>
             <div class="panel-body">
                 <form role="form" method="post" 
