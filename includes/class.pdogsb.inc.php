@@ -1,5 +1,18 @@
 <?php
-
+/**
+ * Classe d'accès aux données.
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   GSB
+ * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL - CNED <jgil@ac-nice.fr>
+ * @copyright 2017 Réseau CERTA
+ * @license   Réseau CERTA
+ * @version   GIT: <0>
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
+ */
 
 /**
  * Classe d'accès aux données.
@@ -72,16 +85,16 @@ class PdoGsb
     /**
      * Retourne les informations d'un utilisateur
      *
-     * @param String $login Login du visiteur
-     * @param String $mdp   Mot de passe du visiteur
+     * @param String $login Login du utilisateur
+     * @param String $mdp   Mot de passe du utilisateur 
      *
      * @return l'id, le nom et le prénom sous la forme d'un tableau associatif
      */
-    public function getInfosVisiteur($login, $mdp)
+    public function getInfosutilisateur($login, $mdp)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT utilisateur.id AS id, utilisateur.nom AS nom, '
-            . 'utilisateur.prenom AS prenom '
+            . 'utilisateur.prenom AS prenom, utilisateur.idType AS type '
             . 'FROM utilisateur '
             . 'WHERE utilisateur.login = :unLogin AND utilisateur.mdp = :unMdp'
         );
@@ -90,40 +103,7 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
-    /**
- * Retourne les catégories "Type employé" existantes dans la BDD
- * @return un tableau associatif de clé idTypeEmploye et de valeur libelleTypeEmploye
- */
-    public function getLesCatEmploye($idCatEmploye=NULL){
-        $req = "select type.id as idTypeEmploye, type.libelleType as libelleTypeEmploye from type";
-        if(!is_null($idCatEmploye)){
-            $req .= " where type.id = '$idCatEmploye'";
-        }
-        $res = PdoGsb::$monPdo->query($req);
-        $laLigne = $res->fetchAll(PDO::FETCH_ASSOC);
-        return $laLigne;
-    }
-/**
- * Retourne les comptes utilisateur GSB existants dans la BDD
- * @param $idUtilisateur (facultatif)
- * @return un tableau avec les informations concernant chaque employé
- */
-    public function getLesCptUtilisateur($idUtilisateur=NULL, $typeUtilisateur=NULL){
-        $id = $idUtilisateur;
-        $type = $typeUtilisateur;
-        $req = "select * from utilisateur
-                inner join type on type.id = utilisateur.idType";
-        if (!is_null($id)){
-            $req .= " where utilisateur.id = '$id'";
-        }
-        if (!is_null($type)){
-            $req .= " where utilisateur.idType = '$type'";
-        }
-        $req .= " order by utilisateur.nom asc";
-        $res = PdoGsb::$monPdo->query($req);
-        $laLigne = $res->fetchAll(PDO::FETCH_ASSOC);
-        return $laLigne;
-    }
+
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
      * hors forfait concernées par les deux arguments.
@@ -136,7 +116,7 @@ class PdoGsb
      * @return tous les champs des lignes de frais hors forfait sous la forme
      * d'un tableau associatif
      */
-    public function getHorsForfait($idVisiteur, $mois)
+    public function getLesFraisHorsForfait($idVisiteur, $mois)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT * FROM lignefraishorsforfait '
@@ -204,35 +184,6 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
-  /**
-     * Retourne sous forme d'un tableau associatif toutes les lignes de frais
-     * hors forfait concernées par les deux arguments.
-     * La boucle foreach ne peut être utilisée ici car on procède
-     * à une modification de la structure itérée - transformation du champ date-
-     *
-     * @param String $idVisiteur ID du visiteur
-     * @param String $mois       Mois sous la forme aaaamm
-     *
-     * @return tous les champs des lignes de frais hors forfait sous la forme
-     * d'un tableau associatif
-     */
-    public function getLesFraisHorsForfait($idVisiteur, $mois)
-    {
-        $requetePrepare = PdoGsb::$monPdo->prepare(
-            'SELECT * FROM lignefraishorsforfait '
-            . 'WHERE lignefraishorsforfait.idvisiteur = :unIdVisiteur '
-            . 'AND lignefraishorsforfait.mois = :unMois'
-        );
-        $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
-        $requetePrepare->execute();
-        $lesLignes = $requetePrepare->fetchAll();
-        for ($i = 0; $i < count($lesLignes); $i++) {
-            $date = $lesLignes[$i]['date'];
-            $lesLignes[$i]['date'] = dateAnglaisVersFrancais($date);
-        }
-        return $lesLignes;
-    }
 
     /**
      * Retourne tous les id de la table FraisForfait
@@ -281,40 +232,6 @@ class PdoGsb
         }
     }
 
-    
-    /**
-     * Met à jour la table ligneFraisForfait
-     * Met à jour la table ligneFraisForfait lors de la correction par le 
-     * comptable pour un visiteur et
-     * un mois donné en enregistrant les nouveaux montants
-     *
-     * @param String $idVisiteur ID du visiteur
-     * @param String $mois       Mois sous la forme aaaamm
-     * @param Array  $lesFrais   tableau associatif de clé idFrais et
-     *                           de valeur la quantité pour ce frais
-     *
-     * @return null
-     */
-    public function majFraisForfaitCompta($idVisiteur, $mois, $lesFraiscompta)
-    {
-        $lesCles = array_keys($lesFraiscompta);
-        foreach ($lesCles as $unIdFrais) {
-            $qte = $lesFraiscompta[$unIdFrais];
-            $requetePrepare = PdoGSB::$monPdo->prepare(
-                'UPDATE lignefraisforfait '
-                . 'SET lignefraisforfait.quantite = :uneQte '
-                . 'WHERE lignefraisforfait.idvisiteur = :unIdVisiteur '
-                . 'AND lignefraisforfait.mois = :unMois '
-                . 'AND lignefraisforfait.idfraisforfait = :idFraiscompta'
-            );
-            $requetePrepare->bindParam(':uneQte', $qte, PDO::PARAM_INT);
-            $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
-            $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
-            $requetePrepare->bindParam(':idFrais', $unIdFrais, PDO::PARAM_STR);
-            $requetePrepare->execute();
-        }
-    }
-    
     /**
      * Met à jour le nombre de justificatifs de la table ficheFrais
      * pour le mois et le visiteur concerné

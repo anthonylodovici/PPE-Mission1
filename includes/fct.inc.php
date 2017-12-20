@@ -25,7 +25,7 @@ function estConnecte()
 }
 
 /**
- * Enregistre dans une variable session les infos d'un utilisateur
+ * Enregistre dans une variable session les infos d'un visiteur
  *
  * @param String $idVisiteur ID du visiteur
  * @param String $nom        Nom du visiteur
@@ -38,9 +38,7 @@ function connecter($idVisiteur, $nom, $prenom,$type)
     $_SESSION['idVisiteur'] = $idVisiteur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
-    // ajout d'une session avec le type et le nom du type
-    $_SESSION['id'] = $typeid;
-    $_SESSION['libelleType'] = $libelleType;
+    $_SESSION['idType'] = $type;
 }
 
 /**
@@ -184,17 +182,7 @@ function lesQteFraisValides($lesFrais)
 {
     return estTableauEntiers($lesFrais);
 }
-/**
- * Vérifie que le tableau de frais ne contient que des valeurs numériques
- *(saisie comptable)
- * @param Array $lesFraiscompta Tableau d'entier
- *
- * @return Boolean vrai ou faux
- */
-function lesQteFraisValidescompta($lesFraiscompta)
-{
-    return estTableauEntiers($lesFraiscompta);
-}
+
 /**
  * Vérifie la validité des trois arguments : la date, le libellé du frais
  * et le montant

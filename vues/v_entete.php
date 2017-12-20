@@ -14,6 +14,7 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,11 +42,9 @@
                                  title="Laboratoire Galaxy-Swiss Bourdin">
                         </h1>
                     </div>
-                    <?php if($_SESSION['id'] == 1){?>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right" role="tablist">
-                            <li 
-                            if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
+                            <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
                                 <a href="index.php">
                                     <span class="glyphicon glyphicon-home"></span>
                                     Accueil
@@ -74,7 +73,8 @@
                     </div>
                 </div>
             </div>
-                            <?php }else {
+            <?php
+            } else {
                 ?>   
                 <h1>
                     <img src="./images/logo.jpg"

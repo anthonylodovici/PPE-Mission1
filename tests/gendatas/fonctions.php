@@ -24,8 +24,7 @@
  */
 function getLesVisiteurs($pdo)
 {
-    $req = 'select * from utilisateur
-            where idType=1';
+    $req = 'select * from visiteur';
     $res = $pdo->query($req);
     $lesLignes = $res->fetchAll();
     return $lesLignes;

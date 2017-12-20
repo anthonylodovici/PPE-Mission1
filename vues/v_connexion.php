@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="style.css" />
 <?php
 /**
  * Vue Connexion
@@ -20,6 +21,12 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Identification utilisateur</h3>
             </div>
+            <div class="tab">
+                <li class="active">
+                    <a href="index.php"><button class="tablinks">Visiteur</button></a>
+ 
+                    <a href="index.php"><button class="tablinks">Comptable</button></a>
+  </div>
             <div class="panel-body">
                 <form role="form" method="post" 
                       action="index.php?uc=connexion&action=valideConnexion">
@@ -41,14 +48,10 @@
                                 <input class="form-control"
                                        placeholder="Mot de passe" name="mdp"
                                        type="password" maxlength="45">
-                                
-                                       
-                                
                             </div>
                         </div>
                         <input class="btn btn-lg btn-success btn-block"
                                type="submit" value="Se connecter">
-                        
                     </fieldset>
                 </form>
             </div>
