@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="style.css" />
+<link rel="bootstrap" href="bootstrap.css" />
 <?php
 /**
  * Vue Connexion
@@ -21,16 +21,18 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Identification utilisateur</h3>
             </div>
-            <div class="tab">
-                <li class="active">
-                    <a href="index.php?uc=connexion&action=visiteur"><button onclick=">class="tablinks">Visiteur</button></a>
- 
-                    <a href="index.php?uc=connexion&action=compta"><button onclick="class="tablinks">Comptable</button></a>
-  </div>
             <div class="panel-body">
-                <form role="form" method="post" 
-                      action="index.php?uc=connexion&action=valideConnexion">
+                <!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#visiteur" data-toggle="tab">Visiteur</a></li>
+        <li><a href="#comptable" data-toggle="tab">Comptable</a></li>
+</ul>
+                <div class="tab-content">
+            <div id= "visiteur" class="tab-pane fade in active">
+                <form role="form" method="post"
+                      action="index.php?uc=connexion&action=valideconnexion">
                     <fieldset>
+                        <input class="form-control" name="type" type="hidden" value="1">
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -39,7 +41,7 @@
                                 <input class="form-control" placeholder="Login"
                                        name="login" type="text" maxlength="45">
                             </div>
-                        </div>
+                                </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -55,6 +57,15 @@
                     </fieldset>
                 </form>
             </div>
+                               <div id= "comptable" class="tab-pane fade"> 
+                                   <form role="form" method="post"
+                      action="index.php?uc=connexion&action=valideconnexion">
+                    <fieldset>
+                        <input class="form-control" name="type" type="hidden" value="2">
+                                            </fieldset>
+
+            </div>
         </div>
     </div>
 </div>
+    </div>

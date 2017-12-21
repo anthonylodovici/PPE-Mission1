@@ -43,7 +43,7 @@ case 'valideConnexion':
         $id = $utilisateur['id'];
         $nom = $utilisateur['nom'];
         $prenom = $utilisateur['prenom'];
-        connecter($id, $nom, $prenom);
+        connecter($id, $nom, $prenom,$type);
         header('Location: index.php');
     }
     break;
