@@ -38,6 +38,7 @@ function connecter($idVisiteur, $nom, $prenom)
     $_SESSION['idVisiteur'] = $idVisiteur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
+    $_SESSION ['idType']=$type;
 }
 
 /**
