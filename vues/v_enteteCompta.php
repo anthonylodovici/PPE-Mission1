@@ -30,7 +30,7 @@
         <div class="container">
             <?php
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
-            if ($estConnecte && $role ="V") {
+            if ($estConnecte && $role ="C") {
                 ?>
             <div class="header">
                 <div class="row vertical-align">
@@ -51,14 +51,14 @@
                             </li>
                             <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
                                 <a href="index.php?uc=gererFrais&action=saisirFrais">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Renseigner la fiche de frais
+                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                    Valider les fiches de frais
                                 </a>
                             </li>
                             <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
                                 <a href="index.php?uc=etatFrais&action=selectionnerMois">
-                                    <span class="glyphicon glyphicon-list-alt"></span>
-                                    Afficher mes fiches de frais
+                                    <span class="glyphicon glyphicon-euro"></span>
+                                    Suivi du paiement des fiches de frais
                                 </a>
                             </li>
                             <li 
