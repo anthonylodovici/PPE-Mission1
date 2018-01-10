@@ -23,18 +23,10 @@ switch ($action) {
 case 'demandeConnexion':
     include 'vues/v_connexion.php';
     break;
-case 'visiteur':
-    $type=1;
-    include 'vues/v_connexion.php';
-    break;
-case 'compta':
-    $type=2;
-    include 'vues/v_connexion.php';
-    break;
 case 'valideConnexion':
     $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
     $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-    $utilisateur = $pdo->getInfosutilisateur($login, $mdp);
+    $utilisateur = $pdo->getInfosUtilisateur($login, $mdp);
     if (!is_array($utilisateur)) {
         ajouterErreur('Login ou mot de passe incorrect');
         include 'vues/v_erreurs.php';
@@ -43,7 +35,7 @@ case 'valideConnexion':
         $id = $utilisateur['id'];
         $nom = $utilisateur['nom'];
         $prenom = $utilisateur['prenom'];
-        connecter($id, $nom, $prenom,$type);
+        connecter($id, $nom, $prenom,$role);
         header('Location: index.php');
     }
     break;
