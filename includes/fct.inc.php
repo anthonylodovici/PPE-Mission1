@@ -7,7 +7,7 @@
  * @category  PPE
  * @package   GSB
  * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Anthony Lodovici <anthony.lodovici@gmail.com>
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -25,11 +25,12 @@ function estConnecte()
 }
 
 /**
- * Enregistre dans une variable session les infos d'un visiteur
+ * Enregistre dans une variable session les infos d'un l'utilisateur
  *
- * @param String $iduser ID du visiteur
- * @param String $nom        Nom du visiteur
- * @param String $prenom     Prénom du visiteur
+ * @param String $iduser ID de l'utilisateur
+ * @param String $nom        Nom de l'utilisateur
+ * @param String $prenom     Prénom de l'utilisateur
+ * @param String $role       role de l'utilisateur
  *
  * @return null
  */
