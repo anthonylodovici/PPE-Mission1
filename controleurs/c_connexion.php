@@ -24,10 +24,9 @@ case 'demandeConnexion':
     include 'vues/v_connexion.php';
     break;
 case 'valideConnexion':
-    $role = filter_input(INPUT_POST ,'role', FILTER_SANITIZE_STRING);
     $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
     $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-    $utilisateur = $pdo->getInfosUtilisateur($login, $mdp);
+    $utilisateur = $pdo->getInfosutilisateur($login, $mdp);
     if (!is_array($utilisateur)) {
         ajouterErreur('Login ou mot de passe incorrect');
         include 'vues/v_erreurs.php';
@@ -38,34 +37,8 @@ case 'valideConnexion':
         $prenom = $utilisateur['prenom'];
         connecter($id, $nom, $prenom,$role);
         header('Location: index.php');
-    }
-    
-    if ($role =="V"){
-        include 'vues/v_entete.php';
-        include 'vues/v_accueil.php';
     }
     break;
-case 'comptable':
-    $role = filter_input(INPUT_POST ,'role', FILTER_SANITIZE_STRING);
-        $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-    $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-    $utilisateur = $pdo->getInfosUtilisateur($login, $mdp);
-    if (!is_array($utilisateur)) {
-        ajouterErreur('Login ou mot de passe incorrect');
-        include 'vues/v_erreurs.php';
-        include 'vues/v_connexion.php';
-    } else {
-        $id = $utilisateur['id'];
-        $nom = $utilisateur['nom'];
-        $prenom = $utilisateur['prenom'];
-        connecter($id, $nom, $prenom,$role);
-        header('Location: index.php');
-    }
-        if ($role =="C"){
-            include 'vues/v_entete.php';
-            include 'vues/v_accueil.php';
-        }
-        break;
 default:
     include 'vues/v_connexion.php';
     break;

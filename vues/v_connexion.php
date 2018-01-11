@@ -58,7 +58,7 @@
                     </div>
                     <div id="comptable" class="tab-pane fade">
                         <form role="form" method="post"
-                              action="index.php?uc=connexion&action=comptable">
+                              action="index.php?uc=connexion&action=valideConnexion">
                             <fieldset>
                                 <input class="form-control" name="role" type="hidden" value="C">
                                 <div class="form-group">

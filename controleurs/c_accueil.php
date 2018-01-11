@@ -13,8 +13,9 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
+
 if ($estConnecte) {
     include 'vues/v_accueil.php';
-}else {
+} else {
     include 'vues/v_connexion.php';
 }
