@@ -89,14 +89,14 @@
                                 </a>
                             </li>
                             <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=gererFrais&action=saisirFrais" class="text-info">
+                                <a href="index.php?uc=gererFrais&action=saisirFrais" class="text-warning">
                                     <span class="glyphicon glyphicon-ok"></span>
                                     Validation des fiches de frais
                                 </a>
                             </li>
                             <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
                                 <a href="index.php?uc=etatFrais&action=selectionnerMois">
-                                    <span style="color:#ffa500" class="glyphicon glyphicon-euro"></span>
+                                    <span class="glyphicon glyphicon-euro"></span>
                                     Suivre le paiement des fiches de frais
                                 </a>
                             </li>
