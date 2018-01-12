@@ -19,6 +19,7 @@
  *
  * @return vrai ou faux
  */
+const comptable = "a101";
 function estConnecte()
 {
     return isset($_SESSION['id']);
@@ -27,19 +28,18 @@ function estConnecte()
 /**
  * Enregistre dans une variable session les infos d'un l'utilisateur
  *
- * @param String $iduser ID de l'utilisateur
+ * @param String $id ID de l'utilisateur
  * @param String $nom        Nom de l'utilisateur
  * @param String $prenom     Prénom de l'utilisateur
  * @param String $role       role de l'utilisateur
  *
  * @return null
  */
-function connecter($id, $nom, $prenom, $role)
+function connecter($id, $nom, $prenom)
 {
     $_SESSION['id'] = $id;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
-    $_SESSION['role']= $role;
 }
 
 /**

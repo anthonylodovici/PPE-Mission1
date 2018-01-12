@@ -40,11 +40,12 @@ class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsb_frais';
-    private static $user = 'userGsb';
-    private static $mdp = 'secret';
+    private static $user = 'root';
+    private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
-
+// Génération :  bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    private static $salt = 'eca46a4797240dd4936bdf61bf32768c62f539ee46472cf9db01f50231328d2e';
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
@@ -91,10 +92,10 @@ class PdoGsb
      * @return l'id, le nom et le prénom sous la forme d'un tableau associatif
      */
     public function getInfosutilisateur($login, $mdp)
-    {
+    {PdoGsb::$salt . hash("sha256", $mdp . PdoGsb::$salt);
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT utilisateur.id AS id, utilisateur.nom AS nom, '
-            . 'utilisateur.prenom AS prenom '
+            . 'utilisateur.prenom AS prenom, utilisateur.idType as role '
             . 'FROM utilisateur '
             . 'WHERE utilisateur.login = :unLogin AND utilisateur.mdp = :unMdp'
         );

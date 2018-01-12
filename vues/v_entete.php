@@ -30,9 +30,8 @@
         <div class="container">
             
             <?php
-            $role = filter_input(INPUT_POST ,'role', FILTER_SANITIZE_STRING);
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
-            
+            $role= filter_input(INPUT_POST,'role');
             if ($estConnecte){
                 ?>
             <div class="header">
@@ -44,6 +43,7 @@
                                  title="Laboratoire Galaxy-Swiss Bourdin">
                         </h1>
                     </div>
+                       <?php if ($_SESSION['id']!==comptable){?>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right" role="tablist">
                             <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
@@ -69,6 +69,7 @@
                                 <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     Déconnexion
+                                    
                                 </a>
                             </li>
                         </ul>
@@ -76,6 +77,42 @@
                 </div>
             </div>
             <?php
+                       }else{
+                           ?>
+                       }
+                            <div class="col-md-8">
+                        <ul class="nav nav-pills pull-right" role="tablist">
+                            <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
+                                <a href="index.php">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    Accueil
+                                </a>
+                            </li>
+                            <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=gererFrais&action=saisirFrais">
+                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                    Validation des fiches de frais
+                                </a>
+                            </li>
+                            <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=etatFrais&action=selectionnerMois">
+                                    <span class="glyphicon glyphicon-euro"></span>
+                                    Suivi des fiches de frais
+                                </a>
+                            </li>
+                            <li 
+                            <?php if ($uc == 'deconnexion') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    Déconnexion
+                                    
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                      <?php }
             }else {
                     ?>
                 <h1>
