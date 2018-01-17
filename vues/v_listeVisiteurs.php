@@ -31,9 +31,7 @@
                            <option selected value="<?php echo $id ?>"><?php echo $visiteur ?></option>
                         <?php
                     }
-                    ?>
-                    ?>    
-
+                    ?> 
                 </select>
             </div>
         </form>

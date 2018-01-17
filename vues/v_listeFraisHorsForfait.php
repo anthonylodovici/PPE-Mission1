@@ -14,6 +14,7 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
+<?php if ($_SESSION['id']!==comptable){?>
 <hr>
 <div class="row">
     <div class="panel panel-info">
@@ -76,3 +77,47 @@
         </form>
     </div>
 </div>
+<?php }else{ ?>
+    <hr>
+<div class="row">
+    <div class="panel panel-warning">
+        <div class="panel-heading">Descriptif des éléments hors forfait</div>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="date">Date</th>
+                    <th class="libelle">Libellé</th>  
+                    <th class="montant">Montant</th>  
+                    <th class="action">&nbsp;</th> 
+                </tr>
+            </thead>  
+            <tbody>
+            <?php
+            foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+                $date = $unFraisHorsForfait['date'];
+                $montant = $unFraisHorsForfait['montant'];
+                $id = $unFraisHorsForfait['id']; ?>           
+                <tr>
+                    <td> <label for="txtDateHF"><?php echo $date ?></label></td>
+                    <td><label for="txtLibelleHF"> <?php echo $libelle ?></label></td>
+                    <td><label for="txtMontantHF"><?php echo $montant ?></label></td>
+                    <td><button class="btn btn-success" type="submit">Corriger</button>
+                <button class="btn btn-danger" type="reset">Reinitialiser</button></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>  
+        </table>
+    </div>
+</div>
+<div class="row">
+    <label for="justif">Nombre de justificatifs:</label><input type="text" class ="champs" id="justif" /><br />
+    
+            <button class="btn btn-success" type="submit">Valider</button>
+            <button class="btn btn-danger" type="reset">Reinitialiser</button>
+        </form>
+    </div>
+</div>
+<?php }

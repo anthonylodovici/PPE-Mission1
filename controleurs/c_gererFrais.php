@@ -55,8 +55,28 @@ case 'supprimerFrais':
     $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);
     $pdo->supprimerFraisHorsForfait($idFrais);
     break;
-
+case'retourneMois':
+     $idVisiteur= filter_input(INPUT_GET, 'idVisiteur',FILTER_SANITIZE_STRING);
+    $moisFrais=$pdo->getLesMoisDisponibles($idVisiteur);
+    $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+$lesVisiteurs = $pdo->getLesVisiteursDisponibles();
+$lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+require 'vues/v_listeVisiteurs.php';
+require'vues/v_listeMois.php';
+require 'vues/v_listeFraisForfait.php';
+require 'vues/v_listeFraisHorsForfait.php';
+case'afficher':
+    $idVisiteur= filter_input(INPUT_GET, 'idVisiteur',FILTER_SANITIZE_STRING);
+    $moisd=$pdo->getLesInfosFicheFrais($idVisiteur, $mois);
 }
+if ($_SESSION['id']!==comptable){
+$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+require 'vues/v_listeFraisForfait.php';
+require 'vues/v_listeFraisHorsForfait.php';
+
+}else{
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 $lesVisiteurs = $pdo->getLesVisiteursDisponibles();
@@ -65,4 +85,4 @@ require 'vues/v_listeVisiteurs.php';
 require'vues/v_listeMois.php';
 require 'vues/v_listeFraisForfait.php';
 require 'vues/v_listeFraisHorsForfait.php';
-
+}

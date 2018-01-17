@@ -60,7 +60,7 @@
         <h6><strong>Mois:</h6></strong>
     </div>
     <div class="col-md-4">
-        <form action="index.php?uc=listeMois&action=selectionnerMois" 
+        <form action="index.php?uc=c_gererFrais&action=retourneMois" 
               method="post" role="form">
             <div class="form-group">
                 <label for="lstMois" accesskey="n"></label>
@@ -83,7 +83,8 @@
                         }
                     }
                     ?>    
-
+<input id="ok" type="submit" value="Valider" class="btn btn-success" 
+                   role="button">
                 </select>
             </div>
         </form>

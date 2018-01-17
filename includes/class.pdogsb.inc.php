@@ -502,9 +502,13 @@ class PdoGsb
         }
         return $visiteur;
     }
-
+/** retourne les infos des visiteurs
+ * 
+ * @return un array
+ * 
+ */
 public function getLesVisiteursDisponibles() {
-        $requete_prepare = PdoGSB::$monPdo->prepare("SELECT id, CONCAT(nom, ' ', prenom) as visiteur FROM utilisateur ORDER BY nom WHERE utilisateur.idType='1'");
+        $requete_prepare = PdoGSB::$monPdo->prepare("SELECT id, CONCAT(nom, ' ', prenom) as visiteur FROM utilisateur WHERE utilisateur.idType='1' ORDER BY nom ");
         $requete_prepare->execute();
         $lesVisiteurs = array();
         while ($laLigne = $requete_prepare->fetch()) {
@@ -517,4 +521,19 @@ public function getLesVisiteursDisponibles() {
         }
         return $lesVisiteurs;
 }
+
+
+ public function getLesTypesFraisForfait() {
+        try {
+            $requete_prepare = PdoGSB::$monPdo->prepare("SELECT id, libelle "
+                    . "FROM fraisforfait "
+                    . "ORDER BY libelle");
+            $requete_prepare->execute();
+            return $requete_prepare->fetchAll();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    
+ }
 }
+        
