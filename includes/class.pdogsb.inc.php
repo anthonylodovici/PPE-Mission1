@@ -516,6 +516,5 @@ public function getLesVisiteursDisponibles() {
             );
         }
         return $lesVisiteurs;
-
 }
 }
