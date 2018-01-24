@@ -45,8 +45,5 @@ case 'deconnexion':
 case'listeVisit':
     include'controleurs/c_listeVisiteurs.php';
     break;
-case'listeMois':
-    include'controleurs/c_listeMois.php';
-    break;
 }
 require 'vues/v_pied.php';
