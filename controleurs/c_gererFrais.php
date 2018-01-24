@@ -75,14 +75,4 @@ $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 require 'vues/v_listeFraisForfait.php';
 require 'vues/v_listeFraisHorsForfait.php';
-
-}else{
-    $utilisateur_selectionne = filter_input(INPUT_POST, 'lstVisiteur',FILTER_SANITIZE_STRING);
-$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
-$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-$lesVisiteurs = $pdo->getLesVisiteursDisponibles();
-$lesMois = $pdo->getLesMoisDisponibles($utilisateur_selectionne);
-require 'vues/v_listeVisiteurs.php';
-require 'vues/v_listeFraisForfait.php';
-require 'vues/v_listeFraisHorsForfait.php';
 }
