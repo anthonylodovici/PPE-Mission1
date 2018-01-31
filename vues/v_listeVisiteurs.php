@@ -44,8 +44,9 @@
         <h6><strong>Mois:</h6></strong>
     </div>
     <div class="col-md-4">
-        <form action="index.php?uc=listeVisiteurs&action=selectionnerMois" 
+        <form action="index.php?uc=listeVisiteurs&action=selectionnerVisiteur" 
               method="post" role="form">
+            <input class="form-control" name="lstVisiteur" type="hidden" value="<?php echo $visiteurSelect ?>">
             <div class="form-group">
                 <label for="lstMoisCompta" accesskey="n"></label>
                 <select id="lstMoisCompta" name="lstMoisCompta" onchange="this.form.submit();" class="form-control">
