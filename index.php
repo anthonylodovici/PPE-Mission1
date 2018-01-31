@@ -42,7 +42,7 @@ case 'etatFrais':
 case 'deconnexion':
     include 'controleurs/c_deconnexion.php';
     break;
-case'listeVisit':
+case'listeVisiteurs':
     include'controleurs/c_listeVisiteurs.php';
     break;
 }

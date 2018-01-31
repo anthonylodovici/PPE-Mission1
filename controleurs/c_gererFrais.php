@@ -66,9 +66,6 @@ require 'vues/v_listeVisiteurs.php';
 require'vues/v_listeMois.php';
 require 'vues/v_listeFraisForfait.php';
 require 'vues/v_listeFraisHorsForfait.php';
-case'afficher':
-    $idVisiteur= filter_input(INPUT_GET, 'idVisiteur',FILTER_SANITIZE_STRING);
-    $moisd=$pdo->getLesInfosFicheFrais($idVisiteur, $mois);
 }
 if ($_SESSION['id']!==comptable){
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
