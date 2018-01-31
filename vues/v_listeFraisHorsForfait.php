@@ -113,8 +113,7 @@
     </div>
 </div>
 <div class="row">
-    <label for="justif">Nombre de justificatifs:</label><input type="text" class ="champs" id="justif" /><br />
-    
+    <label for="justif">Nombre de justificatifs:</label><input type="text" class ="champs" id="justif" name="justificatifs" value="<?php echo $nbJustificatifs ?>" /><br />
             <button class="btn btn-success" type="submit">Valider</button>
             <button class="btn btn-danger" type="reset">Reinitialiser</button>
         </form>

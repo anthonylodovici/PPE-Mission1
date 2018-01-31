@@ -26,11 +26,11 @@ switch ($action) {
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteurSelect, $leMois);
     $lesFraisForfait = $pdo->getLesFraisForfait($visiteurSelect, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($visiteurSelect, $leMois);
+    $nbJustificatifs = $pdo->getNbjustificatifs($visiteurSelect, $leMois);
     $numAnnee = substr($leMois, 0, 4);
     $numMois = substr($leMois, 4, 2);
     $libEtat = $lesInfosFicheFrais['libEtat'];
     $montantValide = $lesInfosFicheFrais['montantValide'];
-    $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
     $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
     }
 
