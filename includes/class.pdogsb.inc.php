@@ -494,7 +494,9 @@ class PdoGsb
      * @return une chaine de caractère du nom et du prénom du visiteur
      */
     public function getNomPrenomVisiteurParId($idVisiteur) {
-        $requete_prepare = PdoGSB::$monPdo->prepare("SELECT CONCAT(nom, ' ', prenom) as visiteur FROM utilisateur WHERE id = :idVisiteur AND utilisateur.idType = '1'");
+        $requete_prepare = PdoGSB::$monPdo->prepare(
+                "SELECT CONCAT(nom, ' ', prenom) as visiteur FROM utilisateur"
+                . " WHERE id = :idVisiteur AND utilisateur.idType = '1'");
         $requete_prepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requete_prepare->execute();
         while ($laLigne = $requete_prepare->fetch()) {
@@ -508,7 +510,9 @@ class PdoGsb
  * 
  */
 public function getLesVisiteursDisponibles() {
-        $requete_prepare = PdoGSB::$monPdo->prepare("SELECT id, CONCAT(nom, ' ', prenom) as visiteur FROM utilisateur WHERE utilisateur.idType='1' ORDER BY nom ");
+        $requete_prepare = PdoGSB::$monPdo->prepare(
+                "SELECT id, CONCAT(nom, ' ', prenom) as visiteur"
+                . " FROM utilisateur WHERE utilisateur.idType='1' ORDER BY nom ");
         $requete_prepare->execute();
         $lesVisiteurs = array();
         while ($laLigne = $requete_prepare->fetch()) {

@@ -7,22 +7,18 @@
  */
 
 $idVisiteur = $_SESSION['id'];
+$visiteurSelect = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING) ;
 $mois = getMois(date('d/m/Y'));
 $numAnnee = substr($mois, 0, 4);
 $numMois = substr($mois, 4, 2);
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 switch ($action) {
     case'selectionnerVisiteur': {
-        $visiteurSelect = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING) ;
             $lesVisiteurs = $pdo->getLesVisiteursDisponibles();
     $lesMois = $pdo->getLesMoisDisponibles($visiteurSelect);
-            include("vues/v_listeVisiteurs.php");
-    }
-    case 'selectionnerMois':{
-        $visiteurSelect = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING) ;
-        $leMois = filter_input(INPUT_POST, 'lstMoisCompta', FILTER_SANITIZE_STRING);
-        $lesMois = $pdo->getLesMoisDisponibles($visiteurSelect);
+    $leMois = filter_input(INPUT_POST, 'lstMoisCompta', FILTER_SANITIZE_STRING);
         $moisASelectionner = $leMois;
+        $visiteurASelectionner= $visiteurSelect;
     $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteurSelect, $leMois);
     $lesFraisForfait = $pdo->getLesFraisForfait($visiteurSelect, $leMois);
     $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($visiteurSelect, $leMois);
@@ -32,8 +28,8 @@ switch ($action) {
     $libEtat = $lesInfosFicheFrais['libEtat'];
     $montantValide = $lesInfosFicheFrais['montantValide'];
     $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+            include("vues/v_listeVisiteurs.php");
     }
-
-    }
+}
     require 'vues/v_listeFraisForfait.php';
 require 'vues/v_listeFraisHorsForfait.php';
