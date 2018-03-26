@@ -14,7 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<?php if ($_SESSION['id']!==comptable){?>
 <hr>
 <div class="row">
     <div class="panel panel-info">
@@ -31,7 +30,7 @@
             <tbody>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-                $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+                $libelle =  htmlspecialchars($unFraisHorsForfait['libelle'], ENT_QUOTES);
                 $date = $unFraisHorsForfait['date'];
                 $montant = $unFraisHorsForfait['montant'];
                 $id = $unFraisHorsForfait['id']; ?>           
@@ -40,7 +39,8 @@
                     <td> <?php echo $libelle ?></td>
                     <td><?php echo $montant ?></td>
                     <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
+                            Supprimer ce frais</a></td>
                 </tr>
                 <?php
             }
@@ -53,70 +53,27 @@
     <h3>Nouvel élément hors forfait</h3>
     <div class="col-md-4">
         <form action="index.php?uc=gererFrais&action=validerCreationFrais" 
-              method="post" role="form">
+              method="post">
             <div class="form-group">
                 <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-                <input type="text" id="txtDateHF" name="dateFrais" 
-                       class="form-control" id="text">
+                <input type="date" id="txtDateHF" name="txtDateHF" 
+                       class="form-control" lang="fr" data-date-format="yyyy-mm-dd" required>
             </div>
             <div class="form-group">
                 <label for="txtLibelleHF">Libellé</label>             
-                <input type="text" id="txtLibelleHF" name="libelle" 
-                       class="form-control" id="text">
+                <input type="text" id="txtLibelleHF" name="txtLibelleHF" 
+                       class="form-control" required>
             </div> 
             <div class="form-group">
                 <label for="txtMontantHF">Montant : </label>
-                <div class="input-group">
-                    <span class="input-group-addon">€</span>
-                    <input type="text" id="txtMontantHF" name="montant" 
-                           class="form-control" value="">
-                </div>
+                <!--<div class="input-group">
+                    <span class="input-group-addon">€</span>-->
+                    <input type="number" min="0" step="0.05" id="txtMontantHF" name="txtMontantHF" 
+                           class="form-control" required>
+                <!--</div>-->
             </div>
             <button class="btn btn-success" type="submit">Ajouter</button>
             <button class="btn btn-danger" type="reset">Effacer</button>
         </form>
+        <br><br><br>
     </div>
-</div>
-<?php }else{ ?>
-    <hr>
-<div class="row">
-    <div class="panel panel-warning">
-        <div class="panel-heading">Descriptif des éléments hors forfait</div>
-        <table class="table table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th class="date">Date</th>
-                    <th class="libelle">Libellé</th>  
-                    <th class="montant">Montant</th>  
-                    <th class="action">&nbsp;</th> 
-                </tr>
-            </thead>  
-            <tbody>
-            <?php
-            foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-                $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-                $date = $unFraisHorsForfait['date'];
-                $montant = $unFraisHorsForfait['montant'];
-                $id = $unFraisHorsForfait['id']; ?>           
-                <tr>
-                    <td> <label for="txtDateHF"><?php echo $date ?></label></td>
-                    <td><label for="txtLibelleHF"> <?php echo $libelle ?></label></td>
-                    <td><label for="txtMontantHF"><?php echo $montant ?></label></td>
-                    <td><button class="btn btn-success" type="submit">Corriger</button>
-                <button class="btn btn-danger" type="reset">Reinitialiser</button></td>
-                </tr>
-                <?php
-            }
-            ?>
-            </tbody>  
-        </table>
-    </div>
-</div>
-<div class="row">
-    <label for="justif">Nombre de justificatifs:</label><input type="text" class ="champs" id="justif" name="justificatifs" value="<?php echo $nbJustificatifs ?>" /><br />
-            <button class="btn btn-success" type="submit">Valider</button>
-            <button class="btn btn-danger" type="reset">Reinitialiser</button>
-        </form>
-    </div>
-</div>
-<?php }
