@@ -17,7 +17,18 @@ require_once 'includes/class.utils.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
-
+/*
+ $login = 'lodovia';
+ $mdp = 'uv23bkb';
+ //$login = 'dandre';
+ //$mdp = 'oppg5';
+ $visiteur = $pdo->getInfosVisiteur($login, $mdp);
+ $id = $visiteur['id'];
+ $nom = $visiteur['nom'];
+ $prenom = $visiteur['prenom'];
+ $comptable = $visiteur['comptable'];
+ Utils::connecter($id, $nom, $prenom, $comptable); 
+ */
 $estConnecte = Utils::estConnecte();
 if ($estConnecte) {
     $estComptable = Utils::estComptable();

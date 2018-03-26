@@ -91,9 +91,9 @@ class PdoGsb
     public function getInfosVisiteur($login, $mdp)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
-            'SELECT utilisateur.id AS id, '
-            . 'utilisateur.nom AS nom, '
-            . 'utilisateur.prenom AS prenom, '
+            'SELECT visiteur.id AS id, '
+            . 'visiteur.nom AS nom, '
+            . 'visiteur.prenom AS prenom, '
             . 'visiteur.comptable AS comptable '
             . 'FROM visiteur '
             . 'WHERE visiteur.login = :unLogin AND visiteur.mdp = :unMdp'
