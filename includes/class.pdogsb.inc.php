@@ -30,11 +30,11 @@ class PdoGsbTest extends TestCase
 
 class PdoGsb
 {
-    private static $serveur = 'mysql:host=localhost';
+    private static $serveur = 'mysql:host=sql.anthonylodovici.fr';
    
-    private static $bdd = 'dbname=gsb_frais';
-    private static $user = 'root';
-    private static $mdp = ''; 
+    private static $bdd = 'dbname=w0pfn3_gsb';
+    private static $user = 'w0pfn3_gsb';
+    private static $mdp = '240496'; 
     private static $monPdo;
     private static $monPdoGsb = null;
 
